@@ -8,7 +8,7 @@ import { CgProfile } from "react-icons/cg";
 
 const LeftSideBar = () => {
   return (
-    <div>
+    <div className=' w-1/5'>
         <div>
             <div className=' ml-4'> 
               <RiTwitterXLine size={"26px"}/>
