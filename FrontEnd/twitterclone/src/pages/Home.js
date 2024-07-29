@@ -1,13 +1,14 @@
 import React from 'react'
 import LeftSideBar from '../components/LeftSideBar'
-import Feed from '../components/Feed'
 import RightSideBar from '../components/RightSideBar'
+import { Outlet } from 'react-router-dom'
+
 
 const Home = () => {
   return (
     <div className='flex justify-around'>
         <LeftSideBar/>
-        <Feed/>
+        <Outlet/>
         <RightSideBar/>
     </div>
   )
