@@ -4,6 +4,7 @@ import { IoMdHome, IoIosNotificationsOutline } from "react-icons/io";
 import { CiSearch, CiBookmark, CiLogout   } from "react-icons/ci";
 import { RiMessage2Line } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { Link } from 'react-router-dom';
 
 
 const LeftSideBar = () => {
@@ -15,10 +16,10 @@ const LeftSideBar = () => {
             </div>
             <div className=''> 
 
-              <div className=' flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
+              <Link to={'/'} className=' flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
               <IoMdHome size={"24px"}/>
               <h1 className=' ml-2 font-bold text-lg'>Home</h1>
-              </div>
+              </Link>
 
               <div className=' flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
               <CiSearch size={"24px"}/>
@@ -35,10 +36,10 @@ const LeftSideBar = () => {
               <h1 className=' ml-2 font-bold text-lg'>Messages</h1>
               </div>
 
-              <div className=' flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
+              <Link to={'/profile'} className=' flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
               <CgProfile size={"24px"}/>
               <h1 className=' ml-2 font-bold text-lg'>Profile</h1>
-              </div>
+              </Link>
 
               <div className=' flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
               <CiBookmark  size={"24px"}/>
