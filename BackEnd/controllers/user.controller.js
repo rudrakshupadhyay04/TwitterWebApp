@@ -82,10 +82,16 @@ export const Login = async (req, res) => {
 };
 
 export const Logout = async (req, res) => {
-    const {id} = req.params;
-    const user = await User.findOne({id});
-    return res.cookie("token", "" , {expiresIn: new Date(Date.now())}).json({
-        message:`${user.username} Logged out sucessfully!!!`,
-        success: true
-    })
+    try {
+        return res.cookie("token", "" , {expiresIn: new Date(Date.now())}).json({
+            message:`Logged out sucessfully!!!`,
+            success: true
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server error",
+            success: false,
+            error: error.message
+        });
+    }
 };
