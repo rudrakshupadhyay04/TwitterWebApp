@@ -79,4 +79,13 @@ export const Login = async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-}
+};
+
+export const Logout = async (req, res) => {
+    const {id} = req.params;
+    const user = await User.findOne({id});
+    return res.cookie("token", "" , {expiresIn: new Date(Date.now())}).json({
+        message:`${user.username} Logged out sucessfully!!!`,
+        success: true
+    })
+};
