@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        bookmarks: {
+            type: Array,
+            default: [],
+        },
         followers:{
             type: Array,
             default: []
