@@ -130,4 +130,22 @@ export const getMyProfile = async (req,res) => {
     } catch (error) {
         console.log(error);
     }
+};
+
+export const getOtherUser = async (req,res) => {
+    try {
+        const {id} = req.params;
+        const otherUser = await User.find({_id:{$ne:id}}).select(-"password");
+        if(!otherUser){
+            return res.status(401).json({
+                message:"Currently do not have any user!!!"
+            })
+        }
+
+        return res.status(200).json({
+            otherUser
+        })
+    } catch (error) {
+        console.log(error);
+    }
 }
