@@ -148,4 +148,31 @@ export const getOtherUser = async (req,res) => {
     } catch (error) {
         console.log(error);
     }
+};
+
+export const followAndUnfollow = async (req,res) => {
+    try {
+        const loggedInUserId = req.body.id;
+        const userId = req.params.id;
+
+        const loggedInUser = await User.findById(loggedInUserId);
+        const user = await User.findById(userId);
+
+        if(! user.followers.includes(loggedInUserId)){
+            await user.updateOne({$push:{followers:loggedInUserId}});
+            await loggedInUser.updateOne({$push:{following:userId}});
+            return res.status(200).json({
+                message:`${loggedInUser.name} started following ${user.name}`
+            })
+        }else{
+            await user.updateOne({$pull:{followers:loggedInUserId}});
+            await loggedInUser.updateOne({$pull:{following:userId}});
+            return res.status(200).json({
+                message:`${loggedInUser.name} unfollow ${user.name}`
+            })
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
 }
