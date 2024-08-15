@@ -3,9 +3,18 @@ import { RiTwitterXLine } from 'react-icons/ri'
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const loginSignupHandler = () => {
     setIsLogin(!isLogin);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(name,email,password,userName);
   }
 
   return (
@@ -21,16 +30,16 @@ const Login = () => {
             <h1 className='font-bold text-6xl'>Happening now.</h1>
           </div>
           <h1 className='mt-4 mb-2 text-2xl font-bold'>{isLogin ? "Login" : "Signup"}</h1>
-          <form className='flex flex-col w-3/5'>
+          <form className='flex flex-col w-3/5' onSubmit={handleSubmit}>
             {
               !isLogin && (<>
-                <input type='text' placeholder='Username' className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
-                <input type='text' placeholder='Name' className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
+                <input type='text' placeholder='Username' value={userName} onChange={(e) => {setUserName(e.target.value)}} className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
+                <input type='text' placeholder='Name' value={name} onChange={(e) => {setName(e.target.value)}} className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
               </>)
             }
 
-            <input type='text' placeholder='Email' className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
-            <input type='text' placeholder='Password' className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
+            <input type='email' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
+            <input type='password' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
             <button className='bg-[#1D9BF0] border-none py-2 my-4 rounded-full text-lg text-white'>{isLogin ? "Login" : "Create Account"}</button>
             <h1>{isLogin ? "Do not have an account?" : "Already have an account? "}<span onClick={loginSignupHandler} className='font-bold text-blue-600 cursor-pointer'>{isLogin ?  "Signup" : "Login"}</span></h1>
           </form>
