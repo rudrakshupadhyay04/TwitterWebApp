@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RiTwitterXLine } from 'react-icons/ri'
 import axios from 'axios';
 import { USER_API_END_POINT } from '../utils/constant.js';
+import toast from 'react-hot-toast'
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -22,8 +23,11 @@ const Login = () => {
           },
           withCredentials: true
         });
-        console.log(res);
+        if(res.data.success){
+          toast.success(res.data.message);
+        }
       } catch (error) {
+        toast.error(error.response.data.message);
         console.log(error)
       }
     }else{
@@ -35,8 +39,12 @@ const Login = () => {
           },
           withCredentials: true
         });
-        console.log(res);
+        if(res.data.success){
+          setIsLogin(true);
+          toast.success(res.data.message);
+        }
       } catch (error) {
+        toast.error(error.response.data.message);
         console.log(error)
       }
     }
