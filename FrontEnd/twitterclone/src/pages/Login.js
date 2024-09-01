@@ -1,21 +1,52 @@
 import React, { useState } from 'react'
 import { RiTwitterXLine } from 'react-icons/ri'
+import axios from 'axios';
+import { USER_API_END_POINT } from '../utils/constant.js';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState("");
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(name,email,password,username);
+    if(isLogin){
+      // login
+      try {
+        const res = await axios.post(`${USER_API_END_POINT}/login`, {email, password},{
+          headers:{
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        });
+        console.log(res);
+      } catch (error) {
+        console.log(error)
+      }
+    }else{
+      // signup
+      try {
+        const res = await axios.post(`${USER_API_END_POINT}/register`, {name, username, email, password}, {
+          headers:{
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        });
+        console.log(res);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 
+  
   const loginSignupHandler = () => {
     setIsLogin(!isLogin);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(name,email,password,userName);
-  }
 
   return (
     <div className='w-screen h-screen flex items-center justify-center'>
@@ -33,7 +64,7 @@ const Login = () => {
           <form className='flex flex-col w-3/5' onSubmit={handleSubmit}>
             {
               !isLogin && (<>
-                <input type='text' placeholder='Username' value={userName} onChange={(e) => {setUserName(e.target.value)}} className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
+                <input type='text' placeholder='Username' value={username} onChange={(e) => {setUserName(e.target.value)}} className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
                 <input type='text' placeholder='Name' value={name} onChange={(e) => {setName(e.target.value)}} className='outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold'/>
               </>)
             }
